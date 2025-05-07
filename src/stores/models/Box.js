@@ -7,9 +7,9 @@ const BoxModel = types
     height: 100,
     color: "#FFF000",
     left: 200,
-    top: 100
+    top: 100,
   })
-  .views(self => ({}))
-  .actions(self => ({}));
+  .views((self) => ({}))
+  .actions((self) => ({}));
 
 export default BoxModel;
