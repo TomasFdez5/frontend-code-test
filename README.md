@@ -74,7 +74,8 @@ Good Luck!
 ## Work to be done
 
 - [x] Add and remove boxes.
-- [ ] Select a box, which should visually indicate that is selected
+- [x] Select a box, which should visually indicate that is selected
+  - Select, deselect, remove selected box.
 - [ ] Drag the boxes around using interact.js and using React refs.
   - Keep in mind you should be able to drag a box even if it's not selected when the dragging starts.
 - [ ] Changing a box's color.
@@ -86,4 +87,6 @@ Good Luck!
 
 ## Notes on the solution
 
-## Possible new features
+## Possible improvements on the current solution
+
+- When remove a selected box, add a new one in the correct position.
