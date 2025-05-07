@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { deselectBox, selectBox } from "../actions/BoxActions";
-import "./BoxDraggable.css"; // Asegúrate de crear este archivo
+import "./BoxDraggable.css";
 
 function BoxDraggable(props) {
   const { id, color, width, height, left, top, selected, children } = props;
