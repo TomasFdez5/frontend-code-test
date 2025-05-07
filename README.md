@@ -73,7 +73,7 @@ Good Luck!
 
 ## Work to be done
 
-- [ ] Add and remove boxes.
+- [x] Add and remove boxes.
 - [ ] Select a box, which should visually indicate that is selected
 - [ ] Drag the boxes around using interact.js and using React refs.
   - Keep in mind you should be able to drag a box even if it's not selected when the dragging starts.

@@ -1,4 +1,4 @@
-import { types } from "mobx-state-tree";
+import { onSnapshot, types } from "mobx-state-tree";
 import uuid from "uuid/v4";
 import BoxModel from "./models/Box";
 import getRandomColor from "../utils/getRandomColor";
@@ -11,6 +11,12 @@ const MainStore = types
     return {
       addBox(box) {
         self.boxes.push(box);
+      },
+      removeBox() {
+        self.boxes.pop();
+      },
+      removeAllBoxes() {
+        self.boxes.clear();
       },
     };
   })
@@ -26,5 +32,8 @@ const box1 = BoxModel.create({
 });
 
 store.addBox(box1);
+
+// Observe store changes
+onSnapshot(store, (snapshot) => console.log(snapshot));
 
 export default store;
