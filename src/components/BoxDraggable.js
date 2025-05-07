@@ -10,7 +10,7 @@ function BoxDraggable(props) {
         backgroundColor: props.color,
         width: props.width,
         height: props.height,
-        transform: `translate(${props.left}px, ${props.top}px)`
+        transform: `translate(${props.left}px, ${props.top}px)`,
       }}
     >
       {props.children}
