@@ -45,7 +45,11 @@ const MainStore = types
       },
     };
   })
-  .views((self) => ({}));
+  .views((self) => ({
+    get selectedBoxesCount() {
+      return self.boxes.filter((box) => box.selected).length;
+    },
+  }));
 
 const store = MainStore.create();
 

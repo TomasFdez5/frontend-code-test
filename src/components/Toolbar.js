@@ -10,8 +10,6 @@ import {
 import store from "../stores/MainStore";
 
 function Toolbar() {
-  const selectedCount = store.boxes.filter((box) => box.selected).length;
-
   return (
     <div className="toolbar">
       <button onClick={addBox}>Add Box</button>
@@ -20,7 +18,7 @@ function Toolbar() {
       <button onClick={removeAllBoxes}>Remove All Boxes</button>
       <input type="color" onChange={changeSelectedBoxesColor} />
       <span id="boxSelectedMsg">No boxes selected</span>
-      <span>{`Counter: ${selectedCount}`}</span>
+      <span>{`Counter: ${store.selectedBoxesCount}`}</span>
     </div>
   );
 }
