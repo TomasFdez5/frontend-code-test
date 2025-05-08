@@ -78,3 +78,7 @@ export const removeSelectedBox = () => {
 export const changeSelectedBoxColor = (event) => {
   store.changeSelectedBoxColor(event.target.value);
 };
+
+export const changeBoxPosition = (id, left, top) => {
+  store.changeBoxPosition(id, left, top);
+};
