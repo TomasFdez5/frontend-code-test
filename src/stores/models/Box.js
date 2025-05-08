@@ -22,6 +22,9 @@ const BoxModel = types
         self.selected = false;
       }
     },
+    setColor(color) {
+      self.color = color;
+    },
   }));
 
 export default BoxModel;
