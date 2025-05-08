@@ -19,17 +19,13 @@ const MainStore = types
         self.boxes.clear();
       },
       selectBox(boxId) {
-        // store.boxes.forEach((Box) => Box.deselect());
         const boxToSelect = self.boxes.find((box) => box.id === boxId);
         if (boxToSelect) {
           boxToSelect.select();
         }
       },
-      deselectBox(boxId) {
-        const boxToDeselect = self.boxes.find((box) => box.id === boxId);
-        if (boxToDeselect) {
-          boxToDeselect.deselect();
-        }
+      deselectAllBoxes() {
+        self.boxes.forEach((box) => box.deselect());
       },
       removeSelectedBoxes() {
         self.boxes = self.boxes.filter((box) => !box.selected);
@@ -37,11 +33,8 @@ const MainStore = types
       changeSelectedBoxesColor(color) {
         self.boxes.filter((box) => box.selected).forEach((box) => box.setColor(color));
       },
-      changeBoxPosition(boxId, left, top) {
-        const boxToChangePosition = self.boxes.find((box) => box.id === boxId);
-        if (boxToChangePosition) {
-          boxToChangePosition.setPosition(left, top);
-        }
+      changeSelectedBoxesPosition(left, top) {
+        self.boxes.filter((box) => box.selected).forEach((box) => box.setPosition(left, top));
       },
     };
   })

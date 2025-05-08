@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import {
   addBox,
   changeSelectedBoxesColor,
+  deselectAllBoxes,
   removeAllBoxes,
   removeLastBoxAdded,
   removeSelectedBoxes,
@@ -16,6 +17,9 @@ function Toolbar() {
       <button onClick={removeLastBoxAdded}>Remove Last Box Added</button>
       <button onClick={removeSelectedBoxes}>Remove Selected Box</button>
       <button onClick={removeAllBoxes}>Remove All Boxes</button>
+      {store.selectedBoxesCount > 0 && (
+        <button onClick={deselectAllBoxes}>Deselect all boxes</button>
+      )}
       <input type="color" onChange={changeSelectedBoxesColor} />
       <span id="boxSelectedMsg">No boxes selected</span>
       <span>{`Counter: ${store.selectedBoxesCount}`}</span>

@@ -67,16 +67,9 @@ export const selectBox = (boxId) => {
   }
 };
 
-export const deselectBox = (boxId) => {
-  store.deselectBox(boxId);
-  const msg = document.getElementById("boxSelectedMsg");
-  const selectedBoxes = store.boxes.filter((box) => box.selected);
-  if (msg) {
-    msg.textContent =
-      selectedBoxes.length === 0
-        ? `No boxes selected`
-        : `Selected boxes: ${selectedBoxes.map((box) => box.id).join(", ")}`;
-  }
+export const deselectAllBoxes = () => {
+  store.deselectAllBoxes();
+  clearMsg();
 };
 
 export const removeSelectedBoxes = () => {
@@ -88,6 +81,6 @@ export const changeSelectedBoxesColor = (event) => {
   store.changeSelectedBoxesColor(event.target.value);
 };
 
-export const changeBoxPosition = (id, left, top) => {
-  store.changeBoxPosition(id, left, top);
+export const changeSelectedBoxesPosition = (left, top) => {
+  store.changeSelectedBoxesPosition(left, top);
 };

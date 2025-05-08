@@ -1,9 +1,8 @@
 import interact from "interactjs";
+import { changeSelectedBoxesPosition } from "../../../actions/BoxActions";
 
-export default function initializeInteractDrag(boxRef, setPosition, getCurrentPosition) {
-  let delta = { left: 0, top: 0 };
-
-  interact(boxRef).draggable({
+export default function initializeInteractDrag(boxRef, id, left, top) {
+  const interactInstance = interact(boxRef.current).draggable({
     inertia: true,
 
     modifiers: [
@@ -14,29 +13,11 @@ export default function initializeInteractDrag(boxRef, setPosition, getCurrentPo
     ],
 
     listeners: {
-      start() {
-        const currentPosition = getCurrentPosition();
-        delta.left = currentPosition.left;
-        delta.top = currentPosition.top;
-      },
-
       move(event) {
-        delta.left += event.dx;
-        delta.top += event.dy;
-
-        event.target.style.transform = `translate(${delta.left}px, ${delta.top}px)`;
-      },
-
-      end(event) {
-        setPosition({
-          left: delta.left,
-          top: delta.top,
-        });
-
-        delta = { left: 0, top: 0 };
+        changeSelectedBoxesPosition(event.dx, event.dy);
       },
     },
   });
 
-  return () => interact(boxRef).unset();
+  return () => interactInstance.unset();
 }

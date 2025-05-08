@@ -1,36 +1,30 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
-import { deselectBox, selectBox } from "../../actions/BoxActions";
+import { selectBox } from "../../actions/BoxActions";
 import "./DraggableBox.css";
-import useDraggable from "../../hooks/useDraggable";
-import store from "../../stores/MainStore";
+import initializeInteractDrag from "./lib/Interact";
 
-function DraggableBox({ id, color, width, height, left, top, selected, children }) {
-  const { ref, position } = useDraggable(left, top, id);
+function DraggableBox(props) {
+  const boxRef = useRef(null);
 
-  const handleBoxClick = (boxId) => {
-    const boxSelected = store.boxes.find((box) => box.id === boxId).selected;
-    if (boxSelected) {
-      deselectBox(boxId);
-    } else {
-      selectBox(boxId);
-    }
-  };
+  useEffect(() => {
+    initializeInteractDrag(boxRef);
+  }, [props]);
 
   return (
     <div
-      id={id}
-      ref={ref}
-      className={`box draggable-box ${selected ? "selected" : ""}`}
-      onClick={() => handleBoxClick(id)}
+      id={props.id}
+      ref={boxRef}
+      className={`box draggable-box ${props.selected ? "selected" : ""}`}
+      onMouseDown={() => selectBox(props.id)}
       style={{
-        backgroundColor: color,
-        width,
-        height,
-        transform: `translate(${position.left}px, ${position.top}px)`,
+        backgroundColor: props.color,
+        width: props.width,
+        height: props.height,
+        transform: `translate(${props.left}px, ${props.top}px)`,
       }}
     >
-      {children}
+      {props.children}
     </div>
   );
 }
