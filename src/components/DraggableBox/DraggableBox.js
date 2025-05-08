@@ -19,7 +19,7 @@ function DraggableBox({ id, color, width, height, left, top, selected, children 
         backgroundColor: color,
         width,
         height,
-        transform: `translate(${position.x}px, ${position.y}px)`,
+        transform: `translate(${position.left}px, ${position.top}px)`,
       }}
     >
       {children}

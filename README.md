@@ -90,4 +90,3 @@ Good Luck!
 ## Possible improvements on the current solution
 
 - When remove a selected box, add a new one in the correct position.
-- Box delta does not take initial position of the box.

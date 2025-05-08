@@ -1,7 +1,7 @@
 import interact from "interactjs";
 
-export default function initializeInteractDrag(boxRef, setPosition) {
-  let delta = { x: 0, y: 0 };
+export default function initializeInteractDrag(boxRef, setPosition, getCurrentPosition) {
+  let delta = { left: 0, top: 0 };
 
   interact(boxRef).draggable({
     inertia: true,
@@ -14,24 +14,29 @@ export default function initializeInteractDrag(boxRef, setPosition) {
     ],
 
     listeners: {
-      move(event) {
-        delta.x += event.dx;
-        delta.y += event.dy;
+      start() {
+        const currentPosition = getCurrentPosition();
+        delta.left = currentPosition.left;
+        delta.top = currentPosition.top;
+      },
 
-        event.target.style.transform = `translate(${delta.x}px, ${delta.y}px)`;
+      move(event) {
+        delta.left += event.dx;
+        delta.top += event.dy;
+
+        event.target.style.transform = `translate(${delta.left}px, ${delta.top}px)`;
       },
 
       end(event) {
-        setPosition((prev) => ({
-          x: prev.x + delta.x,
-          y: prev.y + delta.y,
-        }));
+        setPosition({
+          left: delta.left,
+          top: delta.top,
+        });
 
-        delta = { x: 0, y: 0 };
+        delta = { left: 0, top: 0 };
       },
     },
   });
 
-  // Cleanup interact instance
   return () => interact(boxRef).unset();
 }
