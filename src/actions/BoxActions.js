@@ -42,9 +42,35 @@ export const addBox = () => {
   store.addBox(newBox);
 };
 
-export const removeBox = () => {
-  store.removeBox();
+const clearMsg = () => {
+  const msg = document.getElementById("boxSelectedMsg");
+  if (msg) {
+    msg.textContent = `No boxes selected`;
+  }
 };
+
+export const removeLastBoxAdded = () => {
+  store.removeLastBoxAdded();
+};
+
 export const removeAllBoxes = () => {
   store.removeAllBoxes();
+  clearMsg();
+};
+
+export const selectBox = (boxId) => {
+  store.selectBox(boxId);
+  const msg = document.getElementById("boxSelectedMsg");
+  if (msg) {
+    msg.textContent = `Box with id ${boxId} selected.`;
+  }
+};
+export const deselectBox = (boxId) => {
+  store.deselectBox(boxId);
+  clearMsg();
+};
+
+export const removeSelectedBox = () => {
+  store.removeSelectedBox();
+  clearMsg();
 };

@@ -1,14 +1,20 @@
 import React from "react";
-import { addBox, removeAllBoxes, removeBox } from "../actions/BoxActions";
+import {
+  addBox,
+  removeAllBoxes,
+  removeLastBoxAdded,
+  removeSelectedBox,
+} from "../actions/BoxActions";
 
 function Toolbar() {
   return (
     <div className="toolbar">
       <button onClick={addBox}>Add Box</button>
-      <button onClick={removeBox}>Remove Box</button>
+      <button onClick={removeLastBoxAdded}>Remove Last Box Added</button>
+      <button onClick={removeSelectedBox}>Remove Selected Box</button>
       <button onClick={removeAllBoxes}>Remove All Boxes</button>
       <input type="color" />
-      <span>No boxes selected</span>
+      <span id="boxSelectedMsg">No boxes selected</span>
     </div>
   );
 }

@@ -12,11 +12,30 @@ const MainStore = types
       addBox(box) {
         self.boxes.push(box);
       },
-      removeBox() {
+      removeLastBoxAdded() {
         self.boxes.pop();
       },
       removeAllBoxes() {
         self.boxes.clear();
+      },
+      selectBox(boxId) {
+        store.boxes.forEach((Box) => Box.deselect());
+        const boxToSelect = self.boxes.find((box) => box.id === boxId);
+        if (boxToSelect) {
+          boxToSelect.select();
+        }
+      },
+      deselectBox(boxId) {
+        const boxToDeselect = self.boxes.find((box) => box.id === boxId);
+        if (boxToDeselect) {
+          boxToDeselect.deselect();
+        }
+      },
+      removeSelectedBox() {
+        const selectedBoxIndex = self.boxes.findIndex((box) => box.selected === true);
+        if (selectedBoxIndex !== -1) {
+          store.boxes.splice(selectedBoxIndex, 1);
+        }
       },
     };
   })

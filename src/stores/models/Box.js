@@ -8,8 +8,20 @@ const BoxModel = types
     color: "#FFF000",
     left: 200,
     top: 100,
+    selected: false,
   })
   .views((self) => ({}))
-  .actions((self) => ({}));
+  .actions((self) => ({
+    select() {
+      if (!self.selected) {
+        self.selected = true;
+      }
+    },
+    deselect() {
+      if (self.selected) {
+        self.selected = false;
+      }
+    },
+  }));
 
 export default BoxModel;

@@ -5,7 +5,7 @@ import BoxDraggable from "./BoxDraggable";
 function Box(props) {
   return (
     <BoxDraggable {...props}>
-      <div>Box</div>
+      <div>{props.id}</div>
     </BoxDraggable>
   );
 }
