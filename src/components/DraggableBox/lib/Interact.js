@@ -1,7 +1,6 @@
 import interact from "interactjs";
 import { changeSelectedBoxesPosition, selectBox } from "../../../actions/BoxActions";
-
-let isHandlingTapFlag = false;
+import store from "../../../stores/MainStore";
 
 export default function initializeInteractDrag(boxRef) {
   const interactInstance = interact(boxRef.current)
@@ -16,22 +15,31 @@ export default function initializeInteractDrag(boxRef) {
       ],
 
       listeners: {
+        start(event) {
+          const id = boxRef.current.id;
+          const box = store.boxes.find((b) => b.id === id);
+          if (!box.selected) {
+            store.selectBox(id);
+          }
+        },
         move(event) {
           changeSelectedBoxesPosition(event.dx, event.dy);
         },
       },
     })
     .on("tap", (event) => {
-      if (isHandlingTapFlag) return;
-
-      isHandlingTapFlag = true;
-
-      // wait for the end of the tap event
-      requestAnimationFrame(() => {
+      const id = boxRef.current.id;
+      const box = store.boxes.find((b) => b.id === id);
+      if (!box.selected) {
         selectBox(boxRef.current.id);
-
-        isHandlingTapFlag = false;
-      });
+      }
+    })
+    .on("doubletap", (event) => {
+      const id = boxRef.current.id;
+      const box = store.boxes.find((b) => b.id === id);
+      if (box.selected) {
+        selectBox(boxRef.current.id);
+      }
     });
 
   return () => interactInstance.unset();

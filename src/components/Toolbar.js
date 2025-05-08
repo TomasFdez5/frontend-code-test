@@ -18,7 +18,10 @@ function Toolbar() {
       <button onClick={removeSelectedBoxes}>Remove Selected Box</button>
       <button onClick={removeAllBoxes}>Remove All Boxes</button>
       {store.selectedBoxesCount > 0 && (
-        <button onClick={deselectAllBoxes}>Deselect all boxes</button>
+        <>
+          <button onClick={deselectAllBoxes}>Deselect all boxes</button>
+          <span>Double click to desect one box</span>
+        </>
       )}
       <input type="color" onChange={changeSelectedBoxesColor} />
       <span id="boxSelectedMsg">No boxes selected</span>
