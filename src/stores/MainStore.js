@@ -43,10 +43,10 @@ const MainStore = types
           selectedBox.setColor(color);
         }
       },
-      changeBoxPosition(boxId, top, left) {
+      changeBoxPosition(boxId, left, top) {
         const boxToChangePosition = self.boxes.find((box) => box.id === boxId);
         if (boxToChangePosition) {
-          boxToChangePosition.setPosition(top, left);
+          boxToChangePosition.setPosition(left, top);
         }
       },
     };

@@ -90,3 +90,4 @@ Good Luck!
 ## Possible improvements on the current solution
 
 - When remove a selected box, add a new one in the correct position.
+- Avoid overlapping boxes when dragging.
