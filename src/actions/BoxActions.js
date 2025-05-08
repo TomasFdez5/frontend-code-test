@@ -61,22 +61,31 @@ export const removeAllBoxes = () => {
 export const selectBox = (boxId) => {
   store.selectBox(boxId);
   const msg = document.getElementById("boxSelectedMsg");
+  const selectedBoxes = store.boxes.filter((box) => box.selected);
   if (msg) {
-    msg.textContent = `Box with id ${boxId} selected.`;
+    msg.textContent = `Selected boxes: ${selectedBoxes.map((box) => box.id).join(", ")}`;
   }
 };
+
 export const deselectBox = (boxId) => {
   store.deselectBox(boxId);
+  const msg = document.getElementById("boxSelectedMsg");
+  const selectedBoxes = store.boxes.filter((box) => box.selected);
+  if (msg) {
+    msg.textContent =
+      selectedBoxes.length === 0
+        ? `No boxes selected`
+        : `Selected boxes: ${selectedBoxes.map((box) => box.id).join(", ")}`;
+  }
+};
+
+export const removeSelectedBoxes = () => {
+  store.removeSelectedBoxes();
   clearMsg();
 };
 
-export const removeSelectedBox = () => {
-  store.removeSelectedBox();
-  clearMsg();
-};
-
-export const changeSelectedBoxColor = (event) => {
-  store.changeSelectedBoxColor(event.target.value);
+export const changeSelectedBoxesColor = (event) => {
+  store.changeSelectedBoxesColor(event.target.value);
 };
 
 export const changeBoxPosition = (id, left, top) => {

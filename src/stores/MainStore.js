@@ -19,7 +19,7 @@ const MainStore = types
         self.boxes.clear();
       },
       selectBox(boxId) {
-        store.boxes.forEach((Box) => Box.deselect());
+        // store.boxes.forEach((Box) => Box.deselect());
         const boxToSelect = self.boxes.find((box) => box.id === boxId);
         if (boxToSelect) {
           boxToSelect.select();
@@ -31,17 +31,11 @@ const MainStore = types
           boxToDeselect.deselect();
         }
       },
-      removeSelectedBox() {
-        const selectedBoxIndex = self.boxes.findIndex((box) => box.selected === true);
-        if (selectedBoxIndex !== -1) {
-          store.boxes.splice(selectedBoxIndex, 1);
-        }
+      removeSelectedBoxes() {
+        self.boxes = self.boxes.filter((box) => !box.selected);
       },
-      changeSelectedBoxColor(color) {
-        const selectedBox = self.boxes.find((box) => box.selected);
-        if (selectedBox) {
-          selectedBox.setColor(color);
-        }
+      changeSelectedBoxesColor(color) {
+        self.boxes.filter((box) => box.selected).forEach((box) => box.setColor(color));
       },
       changeBoxPosition(boxId, left, top) {
         const boxToChangePosition = self.boxes.find((box) => box.id === boxId);

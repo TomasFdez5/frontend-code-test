@@ -3,18 +3,26 @@ import { observer } from "mobx-react";
 import { deselectBox, selectBox } from "../../actions/BoxActions";
 import "./DraggableBox.css";
 import useDraggable from "../../hooks/useDraggable";
+import store from "../../stores/MainStore";
 
 function DraggableBox({ id, color, width, height, left, top, selected, children }) {
-  const { ref, position } = useDraggable(left, top);
+  const { ref, position } = useDraggable(left, top, id);
 
-  const handleToggle = () => (selected ? deselectBox(id) : selectBox(id));
+  const handleBoxClick = (boxId) => {
+    const boxSelected = store.boxes.find((box) => box.id === boxId).selected;
+    if (boxSelected) {
+      deselectBox(boxId);
+    } else {
+      selectBox(boxId);
+    }
+  };
 
   return (
     <div
       id={id}
       ref={ref}
       className={`box draggable-box ${selected ? "selected" : ""}`}
-      onClick={handleToggle}
+      onClick={() => handleBoxClick(id)}
       style={{
         backgroundColor: color,
         width,
