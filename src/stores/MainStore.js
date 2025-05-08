@@ -1,7 +1,9 @@
-import { onSnapshot, types } from "mobx-state-tree";
+import { applySnapshot, onSnapshot, types } from "mobx-state-tree";
 import uuid from "uuid/v4";
 import BoxModel from "./models/Box";
 import getRandomColor from "../utils/getRandomColor";
+
+const STORAGE_KEY = "main-store";
 
 const MainStore = types
   .model("MainStore", {
@@ -38,6 +40,15 @@ const MainStore = types
       changeSelectedBoxesPosition(left, top) {
         self.boxes.filter((box) => box.selected).forEach((box) => box.setPosition(left, top));
       },
+
+      saveToLocalStorage(snapshot) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
+      },
+      loadLocalStorage() {
+        const rawSnapshot = localStorage.getItem(STORAGE_KEY);
+        if (!rawSnapshot) return null;
+        applySnapshot(self, JSON.parse(rawSnapshot));
+      },
     };
   })
   .views((self) => ({
@@ -48,16 +59,23 @@ const MainStore = types
 
 const store = MainStore.create();
 
-const box1 = BoxModel.create({
-  id: uuid(),
-  color: getRandomColor(),
-  left: 0,
-  top: 0,
-});
+store.loadLocalStorage();
 
-store.addBox(box1);
+if (store.boxes.length === 0) {
+  const box1 = BoxModel.create({
+    id: uuid(),
+    color: getRandomColor(),
+    left: 0,
+    top: 0,
+  });
+
+  store.addBox(box1);
+}
 
 // Observe store changes
-onSnapshot(store, (snapshot) => console.log(snapshot));
+onSnapshot(store, (snapshot) => {
+  console.log(snapshot);
+  store.saveToLocalStorage(snapshot);
+});
 
 export default store;
