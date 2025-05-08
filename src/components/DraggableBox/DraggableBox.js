@@ -2,22 +2,24 @@ import React from "react";
 import { observer } from "mobx-react";
 import { deselectBox, selectBox } from "../../actions/BoxActions";
 import "./DraggableBox.css";
+import useDraggable from "../../hooks/useDraggable";
 
-function DraggableBox(props) {
-  const { id, color, width, height, left, top, selected, children } = props;
+function DraggableBox({ id, color, width, height, left, top, selected, children }) {
+  const { ref, position } = useDraggable(left, top);
 
   const handleToggle = () => (selected ? deselectBox(id) : selectBox(id));
 
   return (
     <div
       id={id}
+      ref={ref}
       className={`box draggable-box ${selected ? "selected" : ""}`}
       onClick={handleToggle}
       style={{
         backgroundColor: color,
         width,
         height,
-        transform: `translate(${left}px, ${top}px)`,
+        transform: `translate(${position.x}px, ${position.y}px)`,
       }}
     >
       {children}
