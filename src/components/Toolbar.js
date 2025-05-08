@@ -9,6 +9,7 @@ import {
   removeSelectedBoxes,
 } from "../actions/BoxActions";
 import store from "../stores/MainStore";
+import { clearHistory, redo, undo } from "../actions/HistoricalActions";
 
 function Toolbar() {
   return (
@@ -17,6 +18,9 @@ function Toolbar() {
       <button onClick={removeLastBoxAdded}>Remove Last Box Added</button>
       <button onClick={removeSelectedBoxes}>Remove Selected Box</button>
       <button onClick={removeAllBoxes}>Remove All Boxes</button>
+      <button onClick={undo}>[ Undo ]</button>
+      <button onClick={redo}>[ Redo ]</button>
+      <button onClick={clearHistory}>[ Clear history ]</button>
       {store.selectedBoxesCount > 0 && (
         <>
           <button onClick={deselectAllBoxes}>Deselect all boxes</button>

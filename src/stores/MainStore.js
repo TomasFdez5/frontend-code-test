@@ -2,12 +2,14 @@ import { applySnapshot, onSnapshot, types } from "mobx-state-tree";
 import uuid from "uuid/v4";
 import BoxModel from "./models/Box";
 import getRandomColor from "../utils/getRandomColor";
+import { UndoManager } from "mst-middlewares";
 
 const STORAGE_KEY = "main-store";
 
 const MainStore = types
   .model("MainStore", {
     boxes: types.array(BoxModel),
+    historyManager: types.optional(UndoManager, {}),
   })
   .actions((self) => {
     return {

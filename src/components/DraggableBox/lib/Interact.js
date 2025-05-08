@@ -16,6 +16,8 @@ export default function initializeInteractDrag(boxRef) {
 
       listeners: {
         start(event) {
+          store.historyManager.startGroup(() => {});
+
           const id = boxRef.current.id;
           const box = store.boxes.find((b) => b.id === id);
           if (!box.selected) {
@@ -24,6 +26,9 @@ export default function initializeInteractDrag(boxRef) {
         },
         move(event) {
           changeSelectedBoxesPosition(event.dx, event.dy);
+        },
+        end(event) {
+          store.historyManager.stopGroup(() => {});
         },
       },
     })
