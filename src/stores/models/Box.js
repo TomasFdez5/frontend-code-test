@@ -26,8 +26,8 @@ const BoxModel = types
       self.color = color;
     },
     setPosition(left, top) {
-      self.left = left;
-      self.top = top;
+      self.left += left;
+      self.top += top;
     },
   }));
 

@@ -19,39 +19,32 @@ const MainStore = types
         self.boxes.clear();
       },
       selectBox(boxId) {
-        store.boxes.forEach((Box) => Box.deselect());
         const boxToSelect = self.boxes.find((box) => box.id === boxId);
-        if (boxToSelect) {
+        if (boxToSelect.selected) {
+          boxToSelect.deselect();
+        } else {
           boxToSelect.select();
         }
       },
-      deselectBox(boxId) {
-        const boxToDeselect = self.boxes.find((box) => box.id === boxId);
-        if (boxToDeselect) {
-          boxToDeselect.deselect();
-        }
+      deselectAllBoxes() {
+        self.boxes.forEach((box) => box.deselect());
       },
-      removeSelectedBox() {
-        const selectedBoxIndex = self.boxes.findIndex((box) => box.selected === true);
-        if (selectedBoxIndex !== -1) {
-          store.boxes.splice(selectedBoxIndex, 1);
-        }
+      removeSelectedBoxes() {
+        self.boxes = self.boxes.filter((box) => !box.selected);
       },
-      changeSelectedBoxColor(color) {
-        const selectedBox = self.boxes.find((box) => box.selected);
-        if (selectedBox) {
-          selectedBox.setColor(color);
-        }
+      changeSelectedBoxesColor(color) {
+        self.boxes.filter((box) => box.selected).forEach((box) => box.setColor(color));
       },
-      changeBoxPosition(boxId, left, top) {
-        const boxToChangePosition = self.boxes.find((box) => box.id === boxId);
-        if (boxToChangePosition) {
-          boxToChangePosition.setPosition(left, top);
-        }
+      changeSelectedBoxesPosition(left, top) {
+        self.boxes.filter((box) => box.selected).forEach((box) => box.setPosition(left, top));
       },
     };
   })
-  .views((self) => ({}));
+  .views((self) => ({
+    get selectedBoxesCount() {
+      return self.boxes.filter((box) => box.selected).length;
+    },
+  }));
 
 const store = MainStore.create();
 
