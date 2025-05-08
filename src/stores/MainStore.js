@@ -37,6 +37,12 @@ const MainStore = types
           store.boxes.splice(selectedBoxIndex, 1);
         }
       },
+      changeSelectedBoxColor(color) {
+        const selectedBox = self.boxes.find((box) => box.selected);
+        if (selectedBox) {
+          selectedBox.setColor(color);
+        }
+      },
     };
   })
   .views((self) => ({}));

@@ -74,3 +74,7 @@ export const removeSelectedBox = () => {
   store.removeSelectedBox();
   clearMsg();
 };
+
+export const changeSelectedBoxColor = (event) => {
+  store.changeSelectedBoxColor(event.target.value);
+};
