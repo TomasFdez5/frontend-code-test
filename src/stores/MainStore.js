@@ -43,6 +43,12 @@ const MainStore = types
           selectedBox.setColor(color);
         }
       },
+      changeBoxPosition(boxId, top, left) {
+        const boxToChangePosition = self.boxes.find((box) => box.id === boxId);
+        if (boxToChangePosition) {
+          boxToChangePosition.setPosition(top, left);
+        }
+      },
     };
   })
   .views((self) => ({}));
