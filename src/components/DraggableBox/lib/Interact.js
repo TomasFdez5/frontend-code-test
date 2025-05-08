@@ -1,23 +1,38 @@
 import interact from "interactjs";
-import { changeSelectedBoxesPosition } from "../../../actions/BoxActions";
+import { changeSelectedBoxesPosition, selectBox } from "../../../actions/BoxActions";
 
-export default function initializeInteractDrag(boxRef, id, left, top) {
-  const interactInstance = interact(boxRef.current).draggable({
-    inertia: true,
+let isHandlingTapFlag = false;
 
-    modifiers: [
-      interact.modifiers.restrictRect({
-        restriction: "parent",
-        endOnly: true,
-      }),
-    ],
+export default function initializeInteractDrag(boxRef) {
+  const interactInstance = interact(boxRef.current)
+    .draggable({
+      inertia: true,
 
-    listeners: {
-      move(event) {
-        changeSelectedBoxesPosition(event.dx, event.dy);
+      modifiers: [
+        interact.modifiers.restrictRect({
+          restriction: "parent",
+          endOnly: true,
+        }),
+      ],
+
+      listeners: {
+        move(event) {
+          changeSelectedBoxesPosition(event.dx, event.dy);
+        },
       },
-    },
-  });
+    })
+    .on("tap", (event) => {
+      if (isHandlingTapFlag) return;
+
+      isHandlingTapFlag = true;
+
+      // wait for the end of the tap event
+      requestAnimationFrame(() => {
+        selectBox(boxRef.current.id);
+
+        isHandlingTapFlag = false;
+      });
+    });
 
   return () => interactInstance.unset();
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
-import { selectBox } from "../../actions/BoxActions";
 import "./DraggableBox.css";
 import initializeInteractDrag from "./lib/Interact";
 
@@ -16,7 +15,6 @@ function DraggableBox(props) {
       id={props.id}
       ref={boxRef}
       className={`box draggable-box ${props.selected ? "selected" : ""}`}
-      onMouseDown={() => selectBox(props.id)}
       style={{
         backgroundColor: props.color,
         width: props.width,

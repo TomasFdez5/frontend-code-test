@@ -91,5 +91,4 @@ Good Luck!
 
 - When remove a selected box, add a new one in the correct position.
 - Avoid overlapping boxes when dragging.
-- With a large number of boxes, getting the number of selected boxes could be costly.
 - Save snapshot only at the end of the drag action.

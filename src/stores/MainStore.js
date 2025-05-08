@@ -20,7 +20,9 @@ const MainStore = types
       },
       selectBox(boxId) {
         const boxToSelect = self.boxes.find((box) => box.id === boxId);
-        if (boxToSelect) {
+        if (boxToSelect.selected) {
+          boxToSelect.deselect();
+        } else {
           boxToSelect.select();
         }
       },
