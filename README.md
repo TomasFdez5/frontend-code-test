@@ -81,8 +81,8 @@ Good Luck!
 - [x] Changing a box's color.
 - [x] Support selection, dragging and color changing for multiple boxes.
 - [x] Display a counter indicating how many boxes are selected.
-- [ ] Save the state of the app locally and restore it when it loads.
-- [ ] Undo / Redo capabilities
+- [x] Save the state of the app locally and restore it when it loads.
+- [x] Undo / Redo capabilities
   - **hint**: mobx-state-tree provides a middleware for this.
 
 ## Notes on the solution
@@ -91,4 +91,3 @@ Good Luck!
 
 - When remove a selected box, add a new one in the correct position.
 - Avoid overlapping boxes when dragging.
-- Save snapshot only at the end of the drag action.
