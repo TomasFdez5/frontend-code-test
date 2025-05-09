@@ -113,7 +113,12 @@ To meet the final requirements of the test, I implemented local state persistenc
    - When using `inertia` with `store.historyManager.startGroup()`, conflicts arise because inertia expects smooth, continuous movement, while the history manager treats actions as discrete steps. This causes issues when the user interrupts a move by starting a new one before the previous finishes, resulting in errors or unexpected behavior.
 
 5. **Simplified colour selection**:
+
    - Tapping a box selects it and updates the color input, making it easier for users to modify the box's color with fewer steps.
+
+6. **Toolbar options based on user actions**:
+   - The toolbar dynamically displays options like "Remove Selected" or "Deselect All" only when relevant.
+   - Removed the "Remove Last Box Added" option, as it was redundant with the "Undo" feature.
 
 ## Additional libraries added
 
