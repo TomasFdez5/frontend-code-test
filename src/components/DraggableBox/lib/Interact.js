@@ -9,7 +9,7 @@ import store from "../../../stores/MainStore";
 export default function initializeInteractDrag(boxRef) {
   const interactInstance = interact(boxRef.current)
     .draggable({
-      inertia: true,
+      // inertia: true,
 
       modifiers: [
         interact.modifiers.restrictRect({
