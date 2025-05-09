@@ -65,29 +65,77 @@ Good Luck!
 
 # Solution
 
+This project is a React-based website that demonstrates state management, interactive UI elements, and undo/redo capabilities. It allows users to create, move, and customize multiple draggable boxes on a canvas. The challenge was to implement all functionality using mobx-state-tree for state management and interact.js for drag-and-drop interactions, while maintaining clean code practices.
+
+## Requirements
+
+- Add and remove boxes.
+- Select a box, which should visually indicate that is selected.
+- Drag the boxes around using interact.js and using React refs.
+- Changing a box's color.
+- Support selection, dragging and color changing for multiple boxes.
+- Display a counter indicating how many boxes are selected.
+- Save the state of the app locally and restore it when it loads.
+- Undo / Redo capabilities.
+
+## Notes on the solution
+
+After receiving the project, I began by exploring the core concepts of the mobx-state-tree and interactjs libraries. Thanks to my previous experience with alternatives like Zustand or react-drag-and-drop, understanding their basic operation was straightforward.
+
+The first step I took was setting up a linter and code formatter to ensure a consistent code style across the project and to help prevent potential errors.
+
+I then focused on the global state management, using mobx-state-tree to structure the data through models and actions, which provided a clear and reactive way to manage application state. After that, I integrated interactjs to enable drag-and-drop functionality. Initially, I encapsulated this logic inside a custom hook. However, as I introduced multiple interactions on the same elements, I encountered issues with synchronizing the initial positions through refs. This caused unexpected behavior when moving elements. I refactored the solution by moving the interaction logic directly into the component, simplifying state synchronization and avoiding conflicts between the visual representation and MobX state.
+
+While testing the app, I noticed inconsistencies in how selection behavior was handled. I improved this using interactjs event listeners to build a cleaner and more reliable selection actions.
+
+To meet the final requirements of the test, I implemented local state persistence, added an action history system, and completed it with the ability to navigate through this history.
+
 ## Additional libraries added
 
 - **Prettier**: For consistent formatting of source code. It was configured with common style preferences.
 
 - **ESLint**: To ensure code quality and best practices. Integrated with the standard react-app configuration and adapted to coexist with Prettier without conflict.
 
-## Work to be done
+## Getting Started
 
-- [x] Add and remove boxes.
-- [x] Select a box, which should visually indicate that is selected
-  - Select, deselect, remove selected box.
-- [x] Drag the boxes around using interact.js and using React refs.
-  - Keep in mind you should be able to drag a box even if it's not selected when the dragging starts.
-- [x] Changing a box's color.
-- [x] Support selection, dragging and color changing for multiple boxes.
-- [x] Display a counter indicating how many boxes are selected.
-- [x] Save the state of the app locally and restore it when it loads.
-- [x] Undo / Redo capabilities
-  - **hint**: mobx-state-tree provides a middleware for this.
+To run the project locally, follow the steps below. The app was developed using **Node.js v16.x** to ensure compatibility with the installed dependencies. Using a different version may cause unexpected errors due to outdated library requirements.
 
-## Notes on the solution
+### Prerequisites
 
-## Possible improvements on the current solution
+- [Node.js v16](https://nodejs.org/download/release/latest-v16.x/)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install/)
 
-- When remove a selected box, add a new one in the correct position.
-- Avoid overlapping boxes when dragging.
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/TomasFdez5/frontend-code-test.git
+   cd frontend-code-test
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   yarn install
+   ```
+
+3. Start the development server:
+   ```bash
+   yarn start
+   ```
+
+### Code quality
+
+Run linters and formatters to ensure code consistency:
+
+- **Lint** the project:
+
+  ```bash
+  yarn run lint
+  ```
+
+- **Format** the code:
+  ```bash
+  yarn run format
+  ```
