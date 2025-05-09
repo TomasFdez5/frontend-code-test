@@ -17,10 +17,6 @@ const MainStore = types
         self.boxes.push(box);
       },
 
-      removeLastBoxAdded() {
-        self.boxes.pop();
-      },
-
       removeAllBoxes() {
         self.boxes.clear();
       },

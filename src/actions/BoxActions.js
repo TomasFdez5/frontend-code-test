@@ -48,10 +48,6 @@ export const deselectAllBoxes = () => {
 
 // [ REMOVE BOXES ACTIONS ]
 
-export const removeLastBoxAdded = () => {
-  store.removeLastBoxAdded();
-};
-
 export const removeAllBoxes = () => {
   store.removeAllBoxes();
   clearMsg();
