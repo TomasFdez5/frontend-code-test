@@ -1,8 +1,8 @@
 import { applySnapshot, onSnapshot, types } from "mobx-state-tree";
-import uuid from "uuid/v4";
 import BoxModel from "./models/Box";
 import getRandomColor from "../utils/getRandomColor";
 import { UndoManager } from "mst-middlewares";
+import { generateId } from "../utils/generateId";
 
 const STORAGE_KEY = "main-store";
 
@@ -95,7 +95,7 @@ store.loadLocalStorage();
 
 if (store.boxes.length === 0) {
   const box1 = BoxModel.create({
-    id: uuid(),
+    id: generateId(),
     color: getRandomColor(),
     left: 0,
     top: 0,

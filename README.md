@@ -117,8 +117,15 @@ To meet the final requirements of the test, I implemented local state persistenc
    - Tapping a box selects it and updates the color input, making it easier for users to modify the box's color with fewer steps.
 
 6. **Toolbar options based on user actions**:
+
    - The toolbar dynamically displays options like "Remove Selected" or "Deselect All" only when relevant.
    - Removed the "Remove Last Box Added" option, as it was redundant with the "Undo" feature.
+
+7. **Refactored Toolbar, UI Improvements and ID Generation**:
+   - The toolbar code was split into smaller components for improved readability and maintainability.
+   - The toolbar's styles were enhanced, buttons, information layout, space for improving the user experience.
+   - A new, more user-friendly ID generation system was implemented, avoiding the use of UUIDs and opting for a simpler index-based approach.
+   - **Button Accessibility**: Improved button accessibility, including emojis, by adding some `aria-labels`.
 
 ## Additional libraries added
 

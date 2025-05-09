@@ -1,7 +1,7 @@
 body,
 html,
 #root {
-  background-color: #282c34;
+  background-color: #121212;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -10,19 +10,24 @@ html,
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
+
 .app {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
+
 .canva {
   width: 1200px;
   height: 675px;
   background-color: aliceblue;
+  border-radius: 8px;
+  margin-top: 14px;
 }
 
 .box {
@@ -30,15 +35,5 @@ html,
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.toolbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-}
-
-.toolbar span {
-  color: white;
+  border-radius: 8px;
 }
