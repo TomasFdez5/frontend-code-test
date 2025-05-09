@@ -1,8 +1,8 @@
 import store from "../stores/MainStore";
 import BoxModel from "../stores/models/Box";
 
-import uuid from "uuid/v4";
 import getRandomColor from "../utils/getRandomColor";
+import { generateId } from "../utils/generateId";
 
 // [ AUX FUNCTIONS ]
 
@@ -17,7 +17,7 @@ const clearMsg = () => {
 
 export const addBox = () => {
   const newBox = BoxModel.create({
-    id: uuid(),
+    id: generateId(),
     color: getRandomColor(),
     left: 0,
     top: 0,

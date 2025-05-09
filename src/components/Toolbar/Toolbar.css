@@ -1,0 +1,75 @@
+.toolbar {
+  align-items: center;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.toolbar-info {
+  color: #c8dbef;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 4px;
+  text-align: center;
+}
+
+.toolbar-info p {
+  margin: 0;
+  padding: 0;
+}
+
+.toolbar button {
+  background-color: #6c29ff;
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 16px;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.toolbar button:hover {
+  background-color: #5b23d9;
+  transform: scale(1.05);
+}
+
+.toolbar button:active {
+  background-color: #4a1db8;
+  transform: scale(0.98);
+}
+
+.toolbar input[type="color"] {
+  background: transparent;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  height: 36px;
+  padding: 0;
+  transition: transform 0.2s ease;
+  width: 36px;
+}
+
+.toolbar input[type="color"]:hover {
+  transform: scale(1.1);
+}
+
+.toolbar span {
+  color: #c8dbef;
+  font-size: 14px;
+}
