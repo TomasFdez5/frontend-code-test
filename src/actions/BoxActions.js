@@ -3,44 +3,8 @@ import BoxModel from "../stores/models/Box";
 
 import uuid from "uuid/v4";
 import getRandomColor from "../utils/getRandomColor";
-import { getRandomPosition } from "../utils/getRandomPosition";
 
-const BOX_WIDTH = 200;
-const BOX_HEIGHT = 100;
-const GRID_COLUMNS = 5;
-const BOX_MARGIN = 50;
-const PARENT_WIDTH = 1200;
-const PARENT_HEIGHT = 675;
-
-export const addBox = () => {
-  const index = store.boxes.length;
-
-  const column = index % GRID_COLUMNS;
-  const row = Math.floor(index / GRID_COLUMNS);
-
-  let left = column * (BOX_WIDTH + BOX_MARGIN);
-  let top = row * (BOX_HEIGHT + BOX_MARGIN);
-
-  if (left + BOX_WIDTH <= PARENT_WIDTH && top + BOX_HEIGHT <= PARENT_HEIGHT) {
-    // Keep safe area
-    left = Math.min(left, PARENT_WIDTH - BOX_WIDTH);
-    top = Math.min(top, PARENT_HEIGHT - BOX_HEIGHT);
-  } else {
-    // Somewhere random
-    const randomPosition = getRandomPosition(BOX_WIDTH, BOX_HEIGHT, PARENT_WIDTH, PARENT_HEIGHT);
-    left = randomPosition.left;
-    top = randomPosition.top;
-  }
-
-  const newBox = BoxModel.create({
-    id: uuid(),
-    color: getRandomColor(),
-    left,
-    top,
-  });
-
-  store.addBox(newBox);
-};
+// [ AUX FUNCTIONS ]
 
 const clearMsg = () => {
   const msg = document.getElementById("boxSelectedMsg");
@@ -49,20 +13,30 @@ const clearMsg = () => {
   }
 };
 
-export const removeLastBoxAdded = () => {
-  store.removeLastBoxAdded();
+// [ CREATE BOX ACTION ]
+
+export const addBox = () => {
+  const newBox = BoxModel.create({
+    id: uuid(),
+    color: getRandomColor(),
+    left: 0,
+    top: 0,
+  });
+
+  store.addBox(newBox);
 };
 
-export const removeAllBoxes = () => {
-  store.removeAllBoxes();
-  clearMsg();
-};
+// [ SELECT BOXES ACTIONS ]
 
-export const selectBox = (boxId) => {
-  store.selectBox(boxId);
+export const selectBox = (id, event) => {
+  if (event.ctrlKey || event.metaKey) {
+    store.selectMultipleBoxes(id);
+  } else {
+    store.selectOneBox(id);
+  }
   const msg = document.getElementById("boxSelectedMsg");
-  const selectedBoxes = store.boxes.filter((box) => box.selected);
   if (msg) {
+    const selectedBoxes = store.boxes.filter((box) => box.selected);
     msg.textContent = `Selected boxes: ${selectedBoxes.map((box) => box.id).join(", ")}`;
   }
 };
@@ -72,15 +46,29 @@ export const deselectAllBoxes = () => {
   clearMsg();
 };
 
-export const removeSelectedBoxes = () => {
-  store.removeSelectedBoxes();
+// [ REMOVE BOXES ACTIONS ]
+
+export const removeAllBoxes = () => {
+  store.removeAllBoxes();
   clearMsg();
 };
 
-export const changeSelectedBoxesColor = (event) => {
-  store.changeSelectedBoxesColor(event.target.value);
+export const removeAllSelectedBoxes = () => {
+  if (store.selectedBoxesCount > 0) {
+    store.removeAllSelectedBoxes();
+    clearMsg();
+  }
 };
 
-export const changeSelectedBoxesPosition = (left, top) => {
-  store.changeSelectedBoxesPosition(left, top);
+// [ BOXES MUTATIONS ACTIONS ]
+
+export const changeAllSelectedBoxesColor = (event) => {
+  store.changeAllSelectedBoxesColor(event.target.value);
+};
+
+export const changeBoxPosition = (boxId, left, top) => {
+  store.changeBoxPosition(boxId, left, top);
+};
+export const changeAllSelectedBoxesPosition = (left, top) => {
+  store.changeAllSelectedBoxesPosition(left, top);
 };

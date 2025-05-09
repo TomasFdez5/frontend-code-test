@@ -17,14 +17,17 @@ const BoxModel = types
         self.selected = true;
       }
     },
+
     deselect() {
       if (self.selected) {
         self.selected = false;
       }
     },
+
     setColor(color) {
       self.color = color;
     },
+
     setPosition(left, top) {
       self.left += left;
       self.top += top;
