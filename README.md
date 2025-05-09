@@ -90,6 +90,23 @@ While testing the app, I noticed inconsistencies in how selection behavior was h
 
 To meet the final requirements of the test, I implemented local state persistence, added an action history system, and completed it with the ability to navigate through this history.
 
+### Implemented Improvements
+
+1. **Move the box without selecting it**:
+
+   - Allows you to move a box without selecting it after the movement, which improves the fluidity of the interaction.
+   - This functionality helps to make position changes of elements more intuitive.
+
+2. **Change the selected box**:
+
+   - When selecting a new box, it **deselects the previous one** and **selects the new one**, ensuring that only one box is selected at a time.
+   - This facilitates interaction by allowing you to switch boxes quickly and clearly, without the need to manually deselect the previously selected box.
+
+3. **Select multiple boxes with the Control or Command key**:
+   - On Windows/Linux systems, you can use the `Ctrl` key to select multiple boxes.
+   - On Mac, the `Command (⌘)` key is used for the same purpose, ensuring that the user experience is consistent across different platforms.
+   - This functionality allows multiple elements to be selected at the same time.
+
 ## Additional libraries added
 
 - **Prettier**: For consistent formatting of source code. It was configured with common style preferences.

@@ -1,5 +1,9 @@
 import interact from "interactjs";
-import { changeSelectedBoxesPosition, selectBox } from "../../../actions/BoxActions";
+import {
+  changeAllSelectedBoxesPosition,
+  changeBoxPosition,
+  selectBox,
+} from "../../../actions/BoxActions";
 import store from "../../../stores/MainStore";
 
 export default function initializeInteractDrag(boxRef) {
@@ -17,15 +21,13 @@ export default function initializeInteractDrag(boxRef) {
       listeners: {
         start(event) {
           store.historyManager.startGroup(() => {});
-
-          const id = boxRef.current.id;
-          const box = store.boxes.find((b) => b.id === id);
-          if (!box.selected) {
-            store.selectBox(id);
-          }
         },
         move(event) {
-          changeSelectedBoxesPosition(event.dx, event.dy);
+          if (store.selectedBoxesCount > 1) {
+            changeAllSelectedBoxesPosition(event.dx, event.dy);
+          } else {
+            changeBoxPosition(boxRef.current.id, event.dx, event.dy);
+          }
         },
         end(event) {
           store.historyManager.stopGroup(() => {});
@@ -36,14 +38,14 @@ export default function initializeInteractDrag(boxRef) {
       const id = boxRef.current.id;
       const box = store.boxes.find((b) => b.id === id);
       if (!box.selected) {
-        selectBox(boxRef.current.id);
+        selectBox(boxRef.current.id, event);
       }
     })
     .on("doubletap", (event) => {
       const id = boxRef.current.id;
       const box = store.boxes.find((b) => b.id === id);
       if (box.selected) {
-        selectBox(boxRef.current.id);
+        selectBox(boxRef.current.id, event);
       }
     });
 

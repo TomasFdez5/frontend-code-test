@@ -16,12 +16,19 @@ const MainStore = types
       addBox(box) {
         self.boxes.push(box);
       },
+
       removeLastBoxAdded() {
         self.boxes.pop();
       },
+
       removeAllBoxes() {
         self.boxes.clear();
       },
+
+      removeAllSelectedBoxes() {
+        self.boxes = self.boxes.filter((box) => !box.selected);
+      },
+
       selectBox(boxId) {
         const boxToSelect = self.boxes.find((box) => box.id === boxId);
         if (boxToSelect.selected) {
@@ -30,22 +37,49 @@ const MainStore = types
           boxToSelect.select();
         }
       },
+
+      selectOneBox(boxId) {
+        const boxToSelect = self.boxes.find((box) => box.id === boxId);
+        if (boxToSelect) {
+          if (!boxToSelect.selected) {
+            self.boxes.forEach((box) => box.deselect());
+            boxToSelect.select();
+          } else {
+            boxToSelect.deselect();
+          }
+        }
+      },
+
+      selectMultipleBoxes(boxId) {
+        const boxToSelect = self.boxes.find((box) => box.id === boxId);
+        if (boxToSelect) {
+          boxToSelect.selected ? boxToSelect.deselect() : boxToSelect.select();
+        }
+      },
+
       deselectAllBoxes() {
         self.boxes.forEach((box) => box.deselect());
       },
-      removeSelectedBoxes() {
-        self.boxes = self.boxes.filter((box) => !box.selected);
-      },
-      changeSelectedBoxesColor(color) {
+
+      changeAllSelectedBoxesColor(color) {
         self.boxes.filter((box) => box.selected).forEach((box) => box.setColor(color));
       },
-      changeSelectedBoxesPosition(left, top) {
+
+      changeBoxPosition(boxId, left, top) {
+        const boxToChangePosition = self.boxes.find((box) => box.id === boxId);
+        if (boxToChangePosition) {
+          boxToChangePosition.setPosition(left, top);
+        }
+      },
+
+      changeAllSelectedBoxesPosition(left, top) {
         self.boxes.filter((box) => box.selected).forEach((box) => box.setPosition(left, top));
       },
 
       saveToLocalStorage(snapshot) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
       },
+
       loadLocalStorage() {
         const rawSnapshot = localStorage.getItem(STORAGE_KEY);
         if (!rawSnapshot) return null;
