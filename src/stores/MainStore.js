@@ -64,7 +64,8 @@ const MainStore = types
       },
 
       saveToLocalStorage(snapshot) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
+        const { historyManager, ...restOfSnapshot } = snapshot;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(restOfSnapshot));
       },
 
       loadLocalStorage() {
