@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import store from "../../stores/MainStore";
 
-const ToolbarInfo = observer(() => (
+const ToolbarInfo = () => (
   <div className="toolbar-info">
     {store.selectedBoxesCount > 0 ? (
       <section>
@@ -31,6 +31,6 @@ const ToolbarInfo = observer(() => (
       </section>
     )}
   </div>
-));
+);
 
-export default ToolbarInfo;
+export default observer(ToolbarInfo);

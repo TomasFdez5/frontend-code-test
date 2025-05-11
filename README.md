@@ -122,10 +122,16 @@ To meet the final requirements of the test, I implemented local state persistenc
    - Removed the "Remove Last Box Added" option, as it was redundant with the "Undo" feature.
 
 7. **Refactored Toolbar, UI Improvements and ID Generation**:
+
    - The toolbar code was split into smaller components for improved readability and maintainability.
    - The toolbar's styles were enhanced, buttons, information layout, space for improving the user experience.
    - A new, more user-friendly ID generation system was implemented, avoiding the use of UUIDs and opting for a simpler index-based approach.
    - **Button Accessibility**: Improved button accessibility, including emojis, by adding some `aria-labels`.
+
+8. **Cleaning up**
+   - Remove deprecated functions.
+   - Remove unnecessary observers.
+   - Keep consistent observer declarations.
 
 ## Additional libraries added
 

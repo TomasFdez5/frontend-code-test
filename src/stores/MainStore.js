@@ -25,15 +25,6 @@ const MainStore = types
         self.boxes = self.boxes.filter((box) => !box.selected);
       },
 
-      selectBox(boxId) {
-        const boxToSelect = self.boxes.find((box) => box.id === boxId);
-        if (boxToSelect.selected) {
-          boxToSelect.deselect();
-        } else {
-          boxToSelect.select();
-        }
-      },
-
       selectOneBox(boxId) {
         const boxToSelect = self.boxes.find((box) => box.id === boxId);
         if (boxToSelect) {

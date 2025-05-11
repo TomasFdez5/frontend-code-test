@@ -10,7 +10,7 @@ import {
 } from "../../actions/BoxActions";
 import { clearHistory, redo, undo } from "../../actions/HistoricalActions";
 
-const ToolbarActions = observer(() => (
+const ToolbarActions = () => (
   <div className="toolbar-actions">
     <button onClick={addBox}>Add Box</button>
     {store.boxes.length > 0 && <button onClick={removeAllBoxes}>Remove All</button>}
@@ -28,6 +28,6 @@ const ToolbarActions = observer(() => (
       </>
     )}
   </div>
-));
+);
 
-export default ToolbarActions;
+export default observer(ToolbarActions);

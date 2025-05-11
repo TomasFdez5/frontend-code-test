@@ -38,7 +38,7 @@ export default function initializeInteractDrag(boxRef) {
       const id = boxRef.current.id;
       const box = store.boxes.find((b) => b.id === id);
       if (!box.selected) {
-        selectBox(boxRef.current.id, event);
+        selectBox(id, event);
       }
       let inputColorElement = document.querySelector("input[type=color]");
       inputColorElement.value = store.boxes.find((box) => box.id === id).color;
